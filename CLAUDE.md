@@ -116,7 +116,6 @@ src/main/java/com/example/token_learn/
 | `IDP_CLIENT_ID` | IdPのクライアントID |
 | `IDP_CLIENT_SECRET` | IdPのクライアントシークレット |
 | `IDP_ISSUER_URI` | IdPのIssuer URI（OIDCディスカバリ用） |
-| `IDP_REDIRECT_URI` | OAuth2リダイレクトURI（ROPC自体は不使用だがSpringの設定に必要） |
 | `LOG_LEVEL` | ルートログレベル（デフォルト: INFO） |
 | `LOG_LEVEL_SECURITY` | Spring Securityのログレベル（デフォルト: INFO） |
 

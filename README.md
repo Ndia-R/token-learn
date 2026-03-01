@@ -101,7 +101,6 @@ cp .env.example .env
 IDP_CLIENT_ID=your-client-id
 IDP_CLIENT_SECRET=your-client-secret
 IDP_ISSUER_URI=https://keycloak.example.com/auth/realms/your-realm
-IDP_REDIRECT_URI=http://localhost:8080/login/oauth2/code/idp
 
 # Logging Configuration（任意）
 LOG_LEVEL=INFO
@@ -133,7 +132,6 @@ docker compose exec token-learn ./gradlew bootRun
 export IDP_CLIENT_ID=your-client-id
 export IDP_CLIENT_SECRET=your-client-secret
 export IDP_ISSUER_URI=https://keycloak.example.com/auth/realms/your-realm
-export IDP_REDIRECT_URI=http://localhost:8080/login/oauth2/code/idp
 
 ./gradlew bootRun
 ```
@@ -227,7 +225,6 @@ curl -s -X POST http://localhost:8888/auth/refresh \
 | `IDP_CLIENT_ID` | IdP のクライアントID | ✅ | - |
 | `IDP_CLIENT_SECRET` | IdP のクライアントシークレット | ✅ | - |
 | `IDP_ISSUER_URI` | IdP の Issuer URI（OIDC ディスカバリ用） | ✅ | - |
-| `IDP_REDIRECT_URI` | OAuth2 リダイレクト URI | ✅ | - |
 | `LOG_LEVEL` | ルートログレベル | - | `INFO` |
 | `LOG_LEVEL_SECURITY` | Spring Security のログレベル | - | `INFO` |
 
@@ -265,6 +262,5 @@ docker run -p 8080:8080 \
   -e IDP_CLIENT_ID=your-client-id \
   -e IDP_CLIENT_SECRET=your-client-secret \
   -e IDP_ISSUER_URI=https://keycloak.example.com/auth/realms/your-realm \
-  -e IDP_REDIRECT_URI=http://localhost:8080/login/oauth2/code/idp \
   token-learn:latest
 ```

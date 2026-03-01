@@ -12,7 +12,6 @@ spring:
             client-secret: ${IDP_CLIENT_SECRET}
             scope: openid,profile,email
             authorization-grant-type: authorization_code
-            redirect-uri: ${IDP_REDIRECT_URI}
         provider:
           idp:
             issuer-uri: ${IDP_ISSUER_URI}
@@ -20,11 +19,6 @@ spring:
 
 server:
   port: 8080
-
-# Swagger UI
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
 
 # Management
 management:
