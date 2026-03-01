@@ -1,0 +1,22 @@
+{
+  "name": "token-learn",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "token-learn",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "mhutchie.git-graph",
+        "streetsidesoftware.code-spell-checker",
+        "shengchen.vscode-checkstyle",
+        "cweijan.vscode-database-client2",
+        "bierner.markdown-mermaid",
+        "anthropic.claude-code",
+        "Google.gemini-cli-vscode-ide-companion"
+      ]
+    }
+  },
+  "postCreateCommand": "./gradlew --version && sudo chown -R vscode:vscode /home/vscode/.claude && sudo chown -R vscode:vscode /home/vscode/.gemini"
+}

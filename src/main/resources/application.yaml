@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: token-learn
+
+  # OAuth2 Client Configuration
+  security:
+    oauth2:
+      client:
+        registration:
+          idp:
+            client-id: ${IDP_CLIENT_ID}
+            client-secret: ${IDP_CLIENT_SECRET}
+            scope: openid,profile,email
+            authorization-grant-type: authorization_code
+            redirect-uri: ${IDP_REDIRECT_URI}
+        provider:
+          idp:
+            issuer-uri: ${IDP_ISSUER_URI}
+            user-name-attribute: preferred_username
+
+server:
+  port: 8080
+
+# Swagger UI
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+# Management
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+# Logging
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+    org.springframework.security: ${LOG_LEVEL_SECURITY:INFO}

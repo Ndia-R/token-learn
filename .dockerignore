@@ -1,0 +1,19 @@
+# バージョン管理
+.git
+
+# Gradle ローカルキャッシュ（BuildKit キャッシュマウントで管理するため除外）
+.gradle
+build
+
+# ドキュメント
+*.md
+
+# Docker Compose 設定（ビルドコンテキスト不要）
+docker-compose*.yml
+
+# 環境変数ファイル
+.env*
+
+# 開発ツール設定
+.claude
+.gemini

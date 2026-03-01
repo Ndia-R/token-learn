@@ -1,0 +1,41 @@
+services:
+  token-learn:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "8888:8080"
+    environment:
+      TZ: Asia/Tokyo
+      # Identity Provider (IdP) Configuration
+      IDP_CLIENT_ID: ${IDP_CLIENT_ID}
+      IDP_CLIENT_SECRET: ${IDP_CLIENT_SECRET}
+      IDP_ISSUER_URI: ${IDP_ISSUER_URI}
+      IDP_REDIRECT_URI: ${IDP_REDIRECT_URI}
+      # Logging Settings
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      LOG_LEVEL_SECURITY: ${LOG_LEVEL_SECURITY:-INFO}
+    volumes:
+      - .:/workspace
+      - gradle-cache:/home/vscode/.gradle
+      - claude-config:/home/vscode/.claude
+      - gemini-config:/home/vscode/.gemini
+    networks:
+      - vsv-emerald-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    command: sleep infinity
+
+volumes:
+  gradle-cache:
+  claude-config:
+  gemini-config:
+
+networks:
+  vsv-emerald-network:
+    external: true
