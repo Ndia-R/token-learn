@@ -1,5 +1,11 @@
 package com.example.token_learn.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "認証", description = "ROPCフローによるトークン取得・更新エンドポイント")
 public class AuthController {
 
     private final AuthService authService;
@@ -33,6 +40,10 @@ public class AuthController {
      * @param tokenRequest ユーザー名・パスワード（リクエストボディ）
      * @return アクセストークン・有効期限・トークン種別・リフレッシュトークン
      */
+    @Operation(summary = "アクセストークン取得（ROPC）", description = "ユーザー名・パスワードを使ってアクセストークンを取得します（Resource Owner Password Credentials フロー）。")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "トークン取得成功", content = @Content(schema = @Schema(implementation = TokenResponse.class)))
+    })
     @PostMapping("/token")
     public ResponseEntity<TokenResponse> token(@Valid @RequestBody TokenRequest tokenRequest) {
         TokenResponse tokenResponse = authService.getToken(tokenRequest);
@@ -47,6 +58,10 @@ public class AuthController {
      * @param refreshTokenRequest リフレッシュトークン（リクエストボディ）
      * @return アクセストークン・有効期限・トークン種別・リフレッシュトークン
      */
+    @Operation(summary = "アクセストークン更新", description = "リフレッシュトークンを使って新しいアクセストークンを取得します。")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "トークン更新成功", content = @Content(schema = @Schema(implementation = TokenResponse.class)))
+    })
     @PostMapping("/refresh")
     public ResponseEntity<TokenResponse> refresh(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
         TokenResponse tokenResponse = authService.refreshToken(refreshTokenRequest);
